@@ -2,17 +2,17 @@ require('dotenv').config();
 import express from 'express';
 
 // custom configs.
-import middlewaresConfig from './configs/middlewares';
 import './configs/database';
+import middlewaresConfig from './configs/middlewares';
+import appRoutes from './modules';
 
 const app = express();
 
 // set middlewares for app.
 middlewaresConfig(app);
 
-app.get('/home', (req, res) => {
-  res.send();
-});
+// load app routes
+app.use('/api/v1', appRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running on port: ${process.env.PORT}`);
